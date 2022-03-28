@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const session = require('express-session');
 const userRouter = require('./users/users-router')
+const authRouter = require('./auth/auth-router.js');
 /**
   Do what needs to be done to support sessions with the `express-session` package!
   To respect users' privacy, do NOT send them a cookie unless they log in.
@@ -36,6 +37,7 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 server.use('/api/users', userRouter)
+server.use('/api/auth', authRouter)
 server.use(session(sessionConfig));
 server.get("/", (req, res) => {
   res.json({ api: "up" });
